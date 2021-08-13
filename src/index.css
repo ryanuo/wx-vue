@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+h2 {
+  text-align: center;
+}
+#formdata button,
+#tp2 button {
+  outline-style: none;
+  vertical-align: top;
+}
+#formdata .form-control,
+#tp2 .form-control {
+  display: inline-block;
+  width: 206px;
+}
+#formdata .alert,
+#tp2 .alert {
+  margin: 10px 0;
+  height: 30px;
+  padding: 5px;
+  text-align: center;
+}
