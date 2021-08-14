@@ -76,6 +76,28 @@ const middlecom = {
       remind: { class: 'alert alert-danger', hidden: true, content: "" }
     }
   },
+  // created(){
+  //   let status = localStorage.hasOwnProperty('detail_List')
+  //   let detail_List = localStorage.getItem('detail_List')
+  //   if (status) {
+  //     this.allList = detail_List
+  //     // let times = 2 - JSON.parse(this.alist)['timeInterval'][0]
+  //   } else {
+  //     return false;
+  //   }
+  // },
+  mounted() {
+    // 先判断原缓冲中的数据是否存在
+    let status = localStorage.hasOwnProperty('detail_List')
+    let detail_List = localStorage.getItem('detail_List')
+    if (status) {
+      this.allList = JSON.parse(detail_List)
+      let times = 2 - this.allList['timeInterval'][0]
+      this.reminds('info',`今日的还需${times}次`)
+    } else {
+      return false;
+    }
+  },
   methods: {
     // 数据的提交
     submitData() {
@@ -128,9 +150,15 @@ const middlecom = {
             time: _this.time
           }
           this.allList = datas
-          this.reminds('success', '提交成功')
+          localStorage.setItem('detail_List', JSON.stringify(datas))
+          this.reminds('success', '提交成功!!,并且将数据更新到缓冲中!!')
         }
       });
+    },
+    // 缓冲清除
+    clearLocationStorage() {
+      localStorage.clear();
+      window.location.reload();
     }
   }
 }
@@ -138,12 +166,13 @@ const middlecom = {
 const app = new Vue({
   el: '#app',
   data: {
-    userId: ''
+    userId: '',
+    alist: {}
   },
   components: {
     myheader, middlecom
   },
-  created() {
+  mounted() {
 
   }
 })
