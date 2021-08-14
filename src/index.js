@@ -93,7 +93,7 @@ const middlecom = {
     if (status) {
       this.allList = JSON.parse(detail_List)
       let times = 2 - this.allList['timeInterval'][0]
-      this.reminds('info',`今日的还需${times}次`)
+      this.reminds('info',`今日还需上报${times}次`)
     } else {
       return false;
     }
