@@ -4,12 +4,9 @@ import Vue from '@/vue.min.js';
 // import '@/favicon.ico';
 // 初始化的值
 const self = {};
-self.key = ''  // 腾讯地图SDK webserverAPI 自己去获取一下
-self.host = ''  // 你自己配置的域名地址
+self.host = 'https://pan.mr90.top'  // 你自己配置的域名地址
 self.today = dayjs().format("YYYY-MM-DD HH:mm:ss") // 获取今天的日期
 self.url = 'http://mp.sxtcm.edu.cn/microapp/health_daily/'
-self.latitude = `37.7378${Math.floor(Math.random() * 91 + 10)}`   // 37.7500
-self.longitude = `112.7391${Math.floor(Math.random() * 91 + 10)}`  // 112.7276 学校地址
 
 // 头部组件
 const myheader = {
@@ -75,7 +72,7 @@ const middlecom = {
     return {
       times: self.today,
       cookie: '',
-      allList: {username:"",userId:"",orgname:"",address:"",distance:"",healthCondition:"",address_ip:"",temperature:"",timeInterval:"",billingContactName:"",billingContactNameTel:""},
+      allList: { username: "", userId: "", orgname: "", address: "", distance: "", healthCondition: "", address_ip: "", temperature: "", timeInterval: "", billingContactName: "", billingContactNameTel: "" },
       remind: { class: 'alert alert-danger', hidden: true, content: "" }
     }
   },
@@ -102,8 +99,8 @@ const middlecom = {
     getInit() {
       let url = `${self.host}/login`  // 域名地址
       let userId = localStorage.getItem('userId')
-      if(!userId){
-        return this.reminds('danger','保存后提交')
+      if (!userId) {
+        return this.reminds('danger', '保存后提交')
       }
       let data = {
         cookie: this.cookie, userId
@@ -111,26 +108,27 @@ const middlecom = {
       $.ajax({
         type: "get", url, data, dataType: 'JSONP', // 注意：这里是指希望服务端返回json格式的数据
         jsonpCallback: "successCallback",
-        success: (res)=> {
+        success: (res) => {
           // 姓名
-          if(res.state==-1)return this.reminds('danger',res.message)
+          if (res.state == -1) return this.reminds('danger', res.message)
           let _this = res[0]
+          // console.log(_this);
           let datas = {
             username: _this.username,
             userId: _this.userId,
             orgname: _this.orgname,
-            address: _this.city + _this.county +_this.address,
-            distance: _this.distance,
+            address: _this.province + _this.city + _this.county + _this.address,
+            distance: _this.distance + "米",
             healthCondition: _this.healthCondition,
             address_ip: _this.latitude + ',' + _this.longitude,
-            temperature:_this.temperature,
-            timeInterval: _this.timeInterval,
-            billingContactName:_this.billingContactName,
-            billingContactNameTel:_this.billingContactNameTel
+            temperature: _this.temperature + "°",
+            timeInterval: _this.timeInterval + "次",
+            billingContactName: _this.billingContactName,
+            billingContactNameTel: _this.billingContactNameTel,
+            time: _this.time
           }
           this.allList = datas
-          this.reminds('success','提交成功')
-          // console.log(this.address);
+          this.reminds('success', '提交成功')
         }
       });
     }

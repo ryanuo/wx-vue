@@ -8,7 +8,8 @@
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
   <!-- <script type="text/javascript" src="./js/vue.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/gh/Rr210/hexofixed@v0.47/js/jquery-3.5.1.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Rr210/hexofixed@frame/frame/bootstrap/3/css/bootstrap.min.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/Rr210/hexofixed@frame/frame/bootstrap/3/css/bootstrap.min.css">
   <title>企业微信打卡--自用版本</title>
 </head>
 <h2>企业微信打卡</h2>
@@ -47,10 +48,14 @@
             <th style="text-align: center;">详细属性</th>
           </tr>
         </thead>
-        <tbody v-if='allList'>
+        <tbody>
           <tr>
             <td>今日提交的次数</td>
-            <td>{{allList.timeInterval}}次</td>
+            <td style="color: red;">{{allList.timeInterval}}</td>
+          </tr>
+          <tr>
+            <td>上一次提交的时间</td>
+            <td style="color: red;">{{allList.time}}</td>
           </tr>
           <tr>
             <td>用户名</td>
@@ -66,7 +71,7 @@
           </tr>
           <tr>
             <td>距离上次提交的距离</td>
-            <td>{{allList.distance}}米</td>
+            <td>{{allList.distance}}</td>
           </tr>
           <tr>
             <td>位置信息</td>
@@ -82,13 +87,7 @@
           </tr>
           <tr>
             <td>温度</td>
-            <td>{{allList.temperature}}°</td>
-          </tr>
-        </tbody>
-        <tbody v-else>
-          <tr>
-            <td>您还为提交数据</td>
-            <td></td>
+            <td>{{allList.temperature}}</td>
           </tr>
         </tbody>
       </table>

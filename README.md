@@ -15,9 +15,8 @@ npm install
 
 > 修改src文件中index.js文件开头的配置信息
 
-* `self.key`// 腾讯地图SDK webserverAPI 自己去获取一下
 * `self.host`// 你自己配置的域名地址
-* 后端文件在flask中修改wx.py中的self.headers中的腾讯sdk
+* 后端文件在flask中修改wx.py中的`self.key`中的腾讯`webserverAPIsdk`
 
 ## 页面展示
 
